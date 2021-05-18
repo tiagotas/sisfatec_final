@@ -1,15 +1,17 @@
 <?php
 
-class ProdutoDAO
-{
-    private $conexao;
+namespace App\DAO;
 
+use \Exception;
+
+class ProdutoDAO extends DAO
+{
     /**
      * Faz as operações CRUD para a entidade Categoria
      */
     public function __construct()
     {
-        $this->conexao = new MySQL();
+        parent::__construct();       
     }
 
 
@@ -22,7 +24,7 @@ class ProdutoDAO
 
             $sql = "INSERT INTO produto (id_categoria, descricao, preco) VALUES (?, ?, ?) ";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $dados_produto['id_categoria']);
             $stmt->bindValue(2, $dados_produto['descricao']);
             $stmt->bindValue(3, $dados_produto['preco']);
@@ -44,7 +46,7 @@ class ProdutoDAO
 
             $sql = "UPDATE produto SET descricao = ?, preco = ? WHERE id = ? ";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $dados_produto['descricao']);
             $stmt->bindValue(2, $dados_produto['preco']);
             $stmt->bindValue(3, $dados_produto['id']);
@@ -67,7 +69,7 @@ class ProdutoDAO
 
             $sql = "DELETE FROM produto WHERE id = ?";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $id);
             $stmt->execute();
 
@@ -88,7 +90,7 @@ class ProdutoDAO
 
             $sql = "SELECT * FROM produto WHERE id = ?";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $id);
             $stmt->execute();
 
@@ -115,10 +117,10 @@ class ProdutoDAO
                     JOIN categoria c ON (p.id_categoria = c.id)
                     ORDER BY id DESC";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_CLASS);
+            return $stmt->fetchAll(DAO::FETCH_CLASS);
 
         } catch(Exception $e) {
             throw new Exception("Erro ao listar todos os produtos do banco de dados. ");    

@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controller;
+
+use App\DAO\{ ProdutoDAO, CategoriaDAO };
+use \stdClass;
+
 class ProdutoController extends Controller
 {
     public static function index()

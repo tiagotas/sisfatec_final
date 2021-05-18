@@ -1,5 +1,7 @@
 <?php
 
+use App\Controller\{LoginController, DashboardController, ProdutoController };
+
 try {
 
     switch ($rota) 
@@ -44,6 +46,7 @@ try {
             echo "Erro 404 - Rota não existe.";
             break;
     }
+    
 } catch (Exception $e) {
     echo $e->getMessage();
 }

@@ -1,15 +1,17 @@
 <?php
 
-class CategoriaDAO
-{
-    private $conexao;
+namespace App\DAO;
 
+use \Exception;
+
+class CategoriaDAO extends DAO
+{
     /**
      * Faz as operações CRUD para a entidade Categoria
      */
     public function __construct()
     {
-        $this->conexao = new MySQL();
+        parent::__construct();
     }
 
 
@@ -22,7 +24,7 @@ class CategoriaDAO
 
             $sql = "INSERT INTO categoria (descricao) VALUES (?) ";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $dados_categoria['descricao']);
 
             return $stmt->execute();
@@ -42,7 +44,7 @@ class CategoriaDAO
 
             $sql = "UPDATE categoria SET descricao = ? WHERE id = ? ";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $dados_categoria['descricao']);
             $stmt->bindValue(2, $dados_categoria['id']);
 
@@ -64,7 +66,7 @@ class CategoriaDAO
 
             $sql = "DELETE FROM categoria WHERE id = ?";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $id);
             $stmt->execute();
 
@@ -85,7 +87,7 @@ class CategoriaDAO
 
             $sql = "SELECT * FROM categoria WHERE id = ?";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->bindValue(1, $id);
             $stmt->execute();
 
@@ -106,10 +108,10 @@ class CategoriaDAO
 
             $sql = "SELECT * FROM categoria ORDER BY id DESC";
 
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = self::$conexao->prepare($sql);
             $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_CLASS);
+            return $stmt->fetchAll(DAO::FETCH_CLASS);
 
         } catch(Exception $e) {
             throw new Exception("Erro ao listar todas as categoria do banco de dados. ");    

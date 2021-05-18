@@ -1,5 +1,9 @@
 <?php
 
+namespace Biblioteca;
+
+use \PDO;
+
 class MySQL extends PDO
 {
     private $host = "localhost";
@@ -13,6 +17,6 @@ class MySQL extends PDO
     {
         $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->db;
 
-        return parent::__construct($dsn, $this->usuario, $this->senha, $this->ops);        
+        return new PDO($dsn, $this->usuario, $this->senha, $this->ops);
     }
 }

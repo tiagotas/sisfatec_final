@@ -1,15 +1,15 @@
 <?php
 
-class LoginDAO
-{
-    private $conexao;
+namespace App\DAO;
 
+class LoginDAO extends DAO
+{
     /**
      * Faz as operações de Login
      */
     public function __construct()
     {
-        $this->conexao = new MySQL();
+        parent::__construct();
     }
 
 
@@ -22,7 +22,7 @@ class LoginDAO
                 FROM usuario
                 WHERE usuario = ? AND senha = ? ";
 
-        $stmt = $this->conexao->prepare($sql);
+        $stmt = self::$conexao->prepare($sql);
         $stmt->bindValue(1, $usuario);
         $stmt->bindValue(2, sha1($senha));
         $stmt->execute();

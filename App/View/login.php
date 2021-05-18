@@ -65,7 +65,7 @@ body {
 
 
       <label for="usuario" class="sr-only">Usuário:</label>
-      <input name="usuario" type="text" id="usuario" class="form-control" placeholder="Seu usuário" required autofocus>
+      <input name="usuario" type="text" id="usuario" value="<?= $usuario ?>" class="form-control" placeholder="Seu usuário" required autofocus>
 
 
       <label for="senha" class="sr-only">Senha:</label>
@@ -74,7 +74,7 @@ body {
 
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Lembrar de mim
+          <input type="checkbox" name="lembrar" value="true"> Lembrar de mim
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
