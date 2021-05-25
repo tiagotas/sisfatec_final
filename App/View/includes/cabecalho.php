@@ -8,7 +8,7 @@
             
 
             <div class="btn-group">
-                <a href="#" class="btn btn-primary">Bem-vindo (a) <?= $_SESSION['dados_usuario']->nome ?></a>
+                <a href="/usuario/meus-dados" class="btn btn-primary">Bem-vindo (a) <?= $_SESSION['dados_usuario']->nome ?></a>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Dropdown</span>
                 </button>

@@ -10,8 +10,40 @@ class LoginController extends Controller
     {
         $usuario = isset($_COOKIE['sisfatec_user']) ? $_COOKIE['sisfatec_user'] :  '';
 
-        include PATH_VIEW . '/login.php';
+        parent::render('login/login');
     }
+
+
+    public static function esqueci_senha()
+    {
+        parent::render('login/esqueci_senha');
+    }
+
+
+    public static function enviar_nova_senha()
+    {
+        $nova_senha = uniqid();
+        $email = $_POST['email'];
+
+        $retorno = "";
+
+        $dao = new LoginDAO();
+
+        $dao->setNewPasswordForUserByEmail($nova_senha, $email);
+
+        $assunto = "Nova Senha do SisFatec";
+        $mensagem = "Sua nova senha é: " . $nova_senha;
+
+        $enviou = mail($email, $assunto, $mensagem, "From: teste.sendmail@metoda.com.br");
+
+        if($enviou == true)
+            $retorno = "uma nova senha está no email.";
+        else
+            $retorno = "Ocorreu um erro ao enviar o email pra tu";
+
+        include PATH_VIEW . 'modulos/login/esquecia_senha.php';
+    }
+
 
 
     private static function remember($usuario)

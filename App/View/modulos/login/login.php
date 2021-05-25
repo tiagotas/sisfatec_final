@@ -77,6 +77,9 @@ body {
           <input type="checkbox" name="lembrar" value="true"> Lembrar de mim
         </label>
       </div>
+
+      <a href="/login/esqueci-senha">Esqueci a Senha</a>
+
       <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
       <p class="mt-5 mb-3 text-muted">&copy; SisFatec 2021</p>
