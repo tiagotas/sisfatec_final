@@ -1,6 +1,10 @@
 <?php
 
-use App\Controller\{LoginController, DashboardController, ProdutoController, UsuarioController};
+use App\Controller\{LoginController, 
+                    DashboardController, 
+                    ProdutoController, 
+                    UsuarioController,
+                    UsuarioGrupoController};
 
 try 
 {
@@ -64,7 +68,30 @@ try
 
         case '/usuario/meus-dados/salvar':
             UsuarioController::salvar();
-            break;    
+            break; 
+        
+        /**
+         * Rotas para trabalhar com grupos de usuários.
+         */
+        case '/usuario/grupo':
+            UsuarioGrupoController::index();
+            break;
+
+        case '/usuario/grupo/cadastrar':
+            UsuarioGrupoController::cadastrar();
+            break;
+        
+        case '/usuario/grupo/ver':
+            UsuarioGrupoController::ver();
+            break;
+        
+        case '/usuario/grupo/salvar':
+            UsuarioGrupoController::salvar();
+            break;
+        
+        case '/usuario/grupo/excluir':
+            UsuarioGrupoController::excluir();
+            break;
 
 
             
