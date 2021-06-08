@@ -65,7 +65,7 @@ body {
 
 
       <label for="usuario" class="sr-only">Usuário:</label>
-      <input name="usuario" type="text" id="usuario" value="<?= $usuario ?>" class="form-control" placeholder="Seu usuário" required autofocus>
+      <input name="usuario" type="text" id="usuario" value="<?= $model->usuario ?>" class="form-control" placeholder="Seu usuário" required autofocus>
 
 
       <label for="senha" class="sr-only">Senha:</label>

@@ -5,13 +5,18 @@ namespace App\Model;
 use App\DAO\UsuarioDAO;
 use Exception;
 
-class UsuarioModel extends Model
+final class UsuarioModel extends Model
 {
     public $id;
+    public $id_grupo;
     public $nome;
     public $usuario;
+    public $email;
     public $senha;
     public $data_cadastro;
+    public $grupo_usuario;
+
+    public $rows_grupo_usuario;
 
 
     public $senha_confirmacao;
@@ -25,12 +30,87 @@ class UsuarioModel extends Model
     public $erro = null;
 
 
+    /**
+     * 
+     */
     public function __construct()
     {
         self::$dao = new UsuarioDAO();
     }
 
 
+    /**
+     * 
+     */
+    public function getAllRows()
+    {
+        $this->rows = self::$dao->getAllRows();
+        $this->rows_count = count($this->rows);
+    }
+
+
+    /**
+     * 
+     */
+    public function getById(int $id)
+    {
+        $dados = self::$dao->getById($id);
+
+        $this->id = $dados->id;
+        $this->nome = $dados->nome;
+        $this->usuario = $dados->usuario;
+        $this->email = $dados->email;
+        $this->data_cadastro = $dados->data_cadastro;
+        $this->id_grupo = $dados->id_grupo;
+    }
+
+    /**
+     * 
+     */
+    public function salvar()
+    {
+        try
+        {
+            if($this->id == null)
+            {
+                $this->senha = uniqid();
+                
+                return self::$dao->insert($this);                
+            }                              
+            else
+                return self::$dao->update($this);
+
+        } catch(Exception $e) {
+            $this->error_message = $e->getMessage();
+            exit($this->error_message);
+        }
+        
+    }
+
+
+    /**
+     * 
+     */
+    public function excluir()
+    {
+        try
+        {
+            if(self::$dao->delete( (int) $_GET['id'] ))
+                return true;
+            else
+                throw new Exception("Não foi possível excluir o usuário.");
+
+        } catch(Exception $e) {
+            $this->erro = $e->getMessage();
+            exit($this->error_message);
+        }      
+    }
+
+
+
+    /**
+     * 
+     */
     public function meus_dados($id)
     {
         $dados = self::$dao->getById($id);
@@ -41,7 +121,10 @@ class UsuarioModel extends Model
     }
 
 
-    public function salvar()
+    /**
+     * 
+     */
+    public function salvar_meus_dados()
     {
         try
         {
@@ -56,7 +139,7 @@ class UsuarioModel extends Model
                 } else
                     $this->senha = $this->senha_confirmacao;                
 
-                self::$dao->update($this);
+                self::$dao->updateCurrentUser($this);
                 $this->confirmacao = "Dados Alterados com Sucesso";
 
             } else

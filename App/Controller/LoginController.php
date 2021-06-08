@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\DAO\LoginDAO;
 
+use App\Model\LoginModel;
+
 class LoginController extends Controller
 {
     public static function index()
     {
-        $usuario = isset($_COOKIE['sisfatec_user']) ? $_COOKIE['sisfatec_user'] :  '';
+        $model = new LoginModel();
+        $model->usuario = isset($_COOKIE['sisfatec_user']) ? $_COOKIE['sisfatec_user'] :  '';
 
-        parent::render('login/login');
+        parent::render('login/login', $model);
     }
 
 
@@ -20,6 +23,7 @@ class LoginController extends Controller
     }
 
 
+    // Ajustar.
     public static function enviar_nova_senha()
     {
         $nova_senha = uniqid();
@@ -64,12 +68,12 @@ class LoginController extends Controller
 
     public static function auth()
     {
-        $dao = new LoginDAO();
+        $model = new LoginModel();
 
-        $usuario = $_POST['usuario'];
-        $senha = $_POST['senha'];
+        $model->usuario = $_POST['usuario'];
+        $model->senha = $_POST['senha'];
 
-        $dados_login = $dao->auth($usuario, $senha);
+        $dados_login = $model->auth();
 
         if(is_object($dados_login))
         {

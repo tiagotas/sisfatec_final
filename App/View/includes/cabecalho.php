@@ -18,6 +18,10 @@
                         <h6 class="dropdown-header">Grupos de Usuários</h6>
                         <a class="dropdown-item" href="/usuario/grupo/cadastrar">Novo Grupo</a>
                         <a class="dropdown-item" href="/usuario/grupo">Lista de Grupos</a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Gerenciar Usuários</h6>
+                        <a class="dropdown-item" href="/usuario/cadastrar">Novo Usuário</a>
+                        <a class="dropdown-item" href="/usuario">Lista de Usuarios</a>
                     </div>
                 </div>
                 <a class="btn btn-outline-dark" href="/login/logout">Sair</a>

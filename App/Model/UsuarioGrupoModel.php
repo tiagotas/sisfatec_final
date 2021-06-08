@@ -11,25 +11,29 @@ class UsuarioGrupoModel extends Model
     public $descricao;
     public $data_cadastro;
 
-    public $rows;
-    public $rows_count;
 
-    public $success_message;
-    public $error_message;
-
-
+    /**
+     * 
+     */
     public function __construct()
     {
         self::$dao = new UsuarioGrupoDAO();
     }
 
-    public function getAllRows()
+
+    /**
+     * 
+     */
+    public function getAllRows() : void
     {
         $this->rows = self::$dao->getAllRows();
         $this->rows_count = count($this->rows);
     }
 
 
+    /**
+     * 
+     */
     public function getById(int $id)
     {
         $obj = self::$dao->getById($id);
@@ -39,6 +43,10 @@ class UsuarioGrupoModel extends Model
         $this->data_cadastro = $obj->data_cadastro;
     }
 
+
+    /**
+     * 
+     */
     public function save()
     {
         if($this->id == null)
@@ -52,6 +60,10 @@ class UsuarioGrupoModel extends Model
         }
     }
 
+
+    /**
+     * 
+     */
     public function delete(int $id)
     {
         try
@@ -61,5 +73,4 @@ class UsuarioGrupoModel extends Model
             $this->error_message = $e->getMessage();
         }        
     }
-
 }

@@ -6,7 +6,6 @@ use App\Model\UsuarioGrupoModel;
 
 class UsuarioGrupoController extends Controller
 {
-
     public static function index()
     {
         $model = new UsuarioGrupoModel();
@@ -30,7 +29,6 @@ class UsuarioGrupoController extends Controller
 
         self::cadastrar($model);
     }
-
 
     public static function salvar()
     {

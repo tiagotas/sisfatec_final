@@ -62,12 +62,32 @@ try
         /**
          * Rotas Para trabalhar com usuário.
          */    
+        case '/usuario':
+            UsuarioController::index();
+            break;
+
+        case '/usuario/cadastrar':
+            UsuarioController::cadastrar();
+            break;
+        
+        case '/usuario/ver':
+            UsuarioController::ver();
+            break;
+
+        case '/usuario/salvar':
+            UsuarioController::salvar();
+            break;
+
+        case '/usuario/excluir':
+            UsuarioController::excluir();
+            break;
+        
         case '/usuario/meus-dados':
             UsuarioController::meus_dados();
             break;
 
         case '/usuario/meus-dados/salvar':
-            UsuarioController::salvar();
+            UsuarioController::salvar_meus_dados();
             break; 
         
         /**
